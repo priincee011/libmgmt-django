@@ -1,0 +1,18 @@
+{% extends "library/base.html" %}
+
+{% block content %}
+<div style="max-width: 400px;">
+    <h2>Student Login</h2>
+    <p>Please enter your credentials to access the book collection.</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="padding: 5px 15px;">Login</button>
+    </form>
+
+    {% if form.errors %}
+        <p class="error">Invalid username or password. Please try again.</p>
+    {% endif %}
+</div>
+{% endblock %}
