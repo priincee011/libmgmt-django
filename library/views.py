@@ -20,7 +20,7 @@ def borrow_book(request, book_id):
         if form.is_valid():
             borrow = form.save(commit=False)
             borrow.user = request.user
-            # We don't even trust the form dropdown; we use the ID from the URL
+            
             borrow.book = book_instance 
             
             if book_instance.available_copies > 0:
@@ -31,11 +31,11 @@ def borrow_book(request, book_id):
             else:
                 error = 'No copies available'
     else:
-        # Pre-select the book in the dropdown
+        # Pre-select the book 
         form = BorrowBookForm(initial={'book': book_instance})
     
     return render(request, 'library/borrow.html', {
         'form': form, 
         'error': error, 
-        'book': book_instance # Pass the book object to show the name in the title
+        'book': book_instance # Passing  the book object 
     })
