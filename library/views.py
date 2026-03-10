@@ -1,5 +1,5 @@
 
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required 
 from .models import Book, BorrowRecord
 from .forms import BorrowBookForm
@@ -8,6 +8,13 @@ from .forms import BorrowBookForm
 def home(request):
     books = Book.objects.all()
     return render(request, 'library/home.html', {'books': books})
+
+
+@login_required
+def my_borrowed_books(request):
+    """Show the current user the books they have borrowed (not returned)."""
+    borrow_records = BorrowRecord.objects.filter(user=request.user, returned=False).select_related('book')
+    return render(request, 'library/my_borrowed_books.html', {'borrow_records': borrow_records})
 
 
 @login_required

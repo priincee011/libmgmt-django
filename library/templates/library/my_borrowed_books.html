@@ -1,0 +1,29 @@
+{% extends "library/base.html" %}
+
+{% block content %}
+<h2>My Borrowed Books</h2>
+{% if borrow_records %}
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Title</th>
+            <th>Author</th>
+            <th>Borrowed On</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in borrow_records %}
+        <tr>
+            <td>{{ record.book.title }}</td>
+            <td>{{ record.book.author }}</td>
+            <td>{{ record.borrow_date }}</td>
+            <td>{% if record.returned %}Returned{% else %}Borrowed{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You have not borrowed any books yet.</p>
+{% endif %}
+{% endblock %}

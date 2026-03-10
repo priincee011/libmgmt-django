@@ -29,7 +29,7 @@
     <nav>
         {% if user.is_authenticated %}
             <a href="{% url 'home' %}">Home</a> | 
-            <a href="{% url 'borrow_book' %}">Borrow Book</a> | 
+            <a href="{% url 'my_borrowed_books' %}">My Books</a> | 
             Welcome, <strong>{{ user.username }}</strong> 
             <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 10px;">
                 {% csrf_token %}
